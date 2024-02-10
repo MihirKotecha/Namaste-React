@@ -1,7 +1,7 @@
 import { CDN_URL } from "../utils/constants";
 
-const RestrauntCards = (props) => {
-  const { resData } = props;
+const RestrauntCards = ({resData}) => {
+  // const { resData } = props;
   const { name, cuisines, avgRating, cloudinaryImageId } = resData.info;
   return (
     <div className="restraunts-card">
