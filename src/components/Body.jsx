@@ -1,5 +1,4 @@
 import RestrauntCards from "./RestrauntCards";
-import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 
@@ -19,9 +18,6 @@ const Body = () => {
     );
     const json = await response.json();
     const restaurants = json.data.cards.slice(3);
-    // const restaurantInfo = restaurants.map((card) => card.card.info);
-
-    console.log(restaurants);
     setListOfRestraunts(restaurants);
     setFilteredRestraunts(restaurants);
   };
