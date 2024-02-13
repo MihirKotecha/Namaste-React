@@ -52,7 +52,6 @@ const Body = () => {
             if (showRated) {
               setListOfRestraunts(filteredRestraunts);
               setShowRated(false);
-              return;
             } else {
               setShowRated(true);
               const filteredList = listOfRestraunts.filter(
