@@ -14,10 +14,10 @@ const Body = () => {
 
   const fetchData = async () => {
     const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.55040&lng=72.95150&collection=80464&tags=layout_BAU_Contextual%2Cnoodles&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.02760&lng=72.58710&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await response.json();
-    const restaurants = json.data.cards.slice(3);
+    const restaurants = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setListOfRestraunts(restaurants);
     setFilteredRestraunts(restaurants);
   };
@@ -56,7 +56,7 @@ const Body = () => {
             } else {
               setShowRated(true);
               const filteredList = listOfRestraunts.filter(
-                (restraunt) => restraunt.card.card.info.avgRating >= 4.5
+                (restraunt) => restraunt.info.avgRating >= 4.5
               );
               setListOfRestraunts(filteredList);
             }
@@ -68,8 +68,8 @@ const Body = () => {
       <div className="restraunt-card-container">
         {listOfRestraunts.map((restraunt) => (
           <RestrauntCards
-            key={restraunt.card.card.info.id}
-            resData={restraunt.card.card}
+            key={restraunt.info.id}
+            resData={restraunt}
           />
         ))}
       </div>
