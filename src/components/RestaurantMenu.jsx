@@ -1,11 +1,14 @@
 import Shimmer from "./Shimmer";
 import { CDN_URL } from "../utils/constants";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"; 
 
-const RestaurantMenu = (resId) => {
+const RestaurantMenu = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const { redId } = useParams();
 
   const [menu, setMenu] = useState([]);
   const [resInfo, setResInfo] = useState({});
@@ -58,7 +61,6 @@ const RestaurantMenu = (resId) => {
                   <li>
                     {item.card.info.name} - Rs. {item.card.info.price / 100}
                   </li>
-                  <li>{item.card.info.description}</li>
                 </ul>
               </p>
             )
