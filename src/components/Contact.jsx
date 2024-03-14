@@ -8,7 +8,6 @@ const Contact = () => {
         If you have any questions, please feel free to contact us at:
         mihirktoecha28@gmail.com
       </p>
-      <UserClass />
     </div>
   );
 };

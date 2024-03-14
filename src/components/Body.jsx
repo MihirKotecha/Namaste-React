@@ -29,15 +29,15 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="search-bar">
+      <div className="flex items-center justify-center">
         <input
           placeholder="Enter the name of the restraunt"
-          className="search-input"
+          className="p-4 m-4 border-solid border-2 border-gray-300 rounded-lg h-10 w-96"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         ></input>
         <button
-          className="search-button"
+          className="px-4 bg-green-500 text-white rounded-lg h-10 m-4"
           onClick={() => {
             const filteredList = filteredRestraunts.filter((restraunt) =>
               restraunt.card.card.info.name
@@ -50,7 +50,7 @@ const Body = () => {
           Enter
         </button>
         <button
-          className="rating-filter"
+          className="bg-gray-500 text-white rounded-lg h-10  px-4"
           onClick={() => {
             if (showRated) {
               setListOfRestraunts(filteredRestraunts);
@@ -67,7 +67,7 @@ const Body = () => {
           Top Rated Restraunts
         </button>
       </div>
-      <div className="restraunt-card-container">
+      <div className="flex flex-wrap justify-center items-center">
         {listOfRestraunts.map((restraunt) => (
           <div key={restraunt.info.id}>
             <Link to={"/restaurant/" + restraunt.info.id}>
