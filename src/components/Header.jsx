@@ -6,7 +6,7 @@ const Header = () => {
   const [login, setLogin] = useState("Log In");
 
   return (
-    <div className="flex justify-between bg-slate-200 shadow-lg mb-2">
+    <div className="flex justify-between bg-white shadow-xl mb-2">
       <div className="logo-container">
         <img className="w-16 h-16 p-2" src={LOGO_URL} />
       </div>

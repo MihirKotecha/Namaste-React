@@ -5,7 +5,7 @@ const RestrauntCards = ({ resData }) => {
   const { name, cuisines, avgRating, cloudinaryImageId } = resData.info;
   const Scuisines = cuisines.slice(0, 3);
   return (
-    <div className="m-4 p-4 w-[300px] h-[550px] bg-slate-100 shadow-md rounded-lg hover:bg-slate-200">
+    <div className="m-4 p-4 w-[300px] h-[550px] bg-white shadow-2xl rounded-lg hover:bg-slate-200">
       <img
         className="rounded-lg w-72 h-[250px]"
         src={CDN_URL + cloudinaryImageId}
