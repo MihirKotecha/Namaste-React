@@ -1,7 +1,9 @@
 import RestrauntCards from "./RestrauntCards";
 import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const Body = () => {
   const [listOfRestraunts, setListOfRestraunts] = useState([]);
@@ -24,7 +26,8 @@ const Body = () => {
     setListOfRestraunts(restaurants);
     setFilteredRestraunts(restaurants);
   };
-
+  const onlineStatus = useOnlineStatus();
+  if (!onlineStatus) return <h1 className="text-center">You are offline!!</h1>;
   if (listOfRestraunts.length === 0) return <Shimmer />;
 
   return (
