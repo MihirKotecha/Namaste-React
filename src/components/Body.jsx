@@ -40,7 +40,7 @@ const Body = () => {
           className="px-4 bg-green-500 text-white rounded-lg h-10 m-4"
           onClick={() => {
             const filteredList = filteredRestraunts.filter((restraunt) =>
-              restraunt.card.card.info.name
+              restraunt.info.name
                 .toLowerCase()
                 .includes(searchText.toLowerCase())
             );

@@ -20,13 +20,13 @@ const RestaurantMenu = () => {
       const response = await fetch(MENU_URL + param.id);
       // console.log(urlId);
       const json = await response.json();
-      const info = json?.data?.cards[0]?.card?.card;
+      const info = json?.data?.cards[2]?.card?.card;
       const menuItems =
-        json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+        json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
           ?.card?.itemCards;
 
-      // console.log(info);
-      // console.log(menuItems);
+      console.log(info);
+      console.log(menuItems);
       setResInfo(info || []);
       setMenu(menuItems || []);
     } catch (err) {
@@ -78,7 +78,7 @@ const RestaurantMenu = () => {
             (item) => (
               (key = item.card.info.id),
               (
-                <li className="flex flex-wrap justify-center items-center h-full w-full">
+                <li className="flex flex-wrap justify-between items-center h-full w-full">
                   <MenuItem info={item.card.info} />
                   {/* {item.card.info.name} - Rs. {item.card.info.price / 100} */}
                 </li>

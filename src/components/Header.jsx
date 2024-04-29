@@ -8,9 +8,9 @@ const Header = () => {
   return (
     <div className="flex justify-between bg-white shadow-xl mb-2">
       <div className="logo-container">
-        <img className="w-16 h-16 p-2" src={LOGO_URL} />
+        <Link to="/" className="w-16 h-16"><img className="w-16 h-16 p-2" src={LOGO_URL} /></Link>
       </div>
-      <div className="flec items-center">
+      <div className="flex items-center">
         <ul className="flex px-2 m-4">
           <li className="px-2"><Link to="/">Home</Link></li>
           <li className="px-2"><Link to="/about">About Us</Link></li>
