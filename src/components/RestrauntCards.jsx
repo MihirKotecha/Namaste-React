@@ -17,4 +17,15 @@ const RestrauntCards = ({ resData }) => {
   );
 };
 
+export const ModifiedRestrauntCards = (RestrauntCards) => {
+  return (props) => {
+    return (
+      <div>
+        <h1 className=" absolute p-2 m-2 bg-black text-white">Open</h1>
+        <RestrauntCards {...props}/>
+      </div>
+    );
+  };
+};
+
 export default RestrauntCards;

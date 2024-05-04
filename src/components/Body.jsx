@@ -3,7 +3,7 @@ import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { ModifiedRestrauntCards } from "./RestrauntCards";
 
 const Body = () => {
   const [listOfRestraunts, setListOfRestraunts] = useState([]);
@@ -29,6 +29,9 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
   if (!onlineStatus) return <h1 className="text-center">You are offline!!</h1>;
   if (listOfRestraunts.length === 0) return <Shimmer />;
+  // console.log(listOfRestraunts);
+
+  const OpenRes = ModifiedRestrauntCards(RestrauntCards);
 
   return (
     <div className="body">
@@ -75,7 +78,15 @@ const Body = () => {
           <div key={restraunt.info.id}>
             <Link to={"/restaurant/" + restraunt.info.id}>
               {" "}
-              <RestrauntCards key={restraunt.info.id} resData={restraunt} />
+              {/* {restraunt.info.isOpen ? (
+                <OpenRes
+                  key={restraunt.info.id}
+                  resData={restraunt}
+                />
+              ) : (
+                <RestrauntCards key={restraunt.info.id} resData={restraunt} />
+              )} */}
+               <RestrauntCards key={restraunt.info.id} resData={restraunt} />
             </Link>
           </div>
         ))}

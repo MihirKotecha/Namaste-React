@@ -1,5 +1,6 @@
 import MenuItem from "./MenuItem";
 import Shimmer from "./Shimmer";
+import RestaurantCategory from "./RestaurantCategory";
 import { MENU_URL, CDN_URL } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -9,40 +10,44 @@ const RestaurantMenu = () => {
     fetchData();
   }, []);
 
-  // const { redId } = useParams();
-
   const [menu, setMenu] = useState([]);
   const [resInfo, setResInfo] = useState([]);
+  const [categorizedCards, setCategorizedCards] = useState([]);
+  const [showIndex, setShowIndex] = useState(-1);
   const param = useParams();
-  console.log(param);
+
   const fetchData = async () => {
     try {
       const response = await fetch(MENU_URL + param.id);
-      // console.log(urlId);
+
       const json = await response.json();
       const info = json?.data?.cards[2]?.card?.card;
       const menuItems =
         json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
           ?.card?.itemCards;
+      setCategorizedCards(
+        json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+          (c) =>
+            c?.card?.card?.["@type"] ===
+            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        ) || []
+      );
 
-      console.log(info);
-      console.log(menuItems);
       setResInfo(info || []);
       setMenu(menuItems || []);
     } catch (err) {
-      err("Error in fetching data!")
+      err("Error in fetching data!");
     }
   };
-
+  // console.log(categorizedCards);
   if (resInfo.length === 0 || menu.length === 0) return <Shimmer />;
 
-  const { cuisines, name, avgRating, cloudinaryImageId, costForTwoMessage } =
-    resInfo.info;
+  const { cuisines, name, avgRating } = resInfo.info;
 
   const cuisinesList = cuisines.slice(0, 3);
 
   return (
-    <div className="grid grid-cols-1 justify-center items-center">
+    <div className="justify-center items-center">
       <div className="flex flex-wrap justify-center items-center">
         <div className="w-2/4 flex m-4 p-4 justify-between items-center">
           <div className="p-4 m-4">
@@ -72,19 +77,17 @@ const RestaurantMenu = () => {
           </div>
         </div>
       </div>
-      <div className="RestaurantMenu flex flex-wrap justify-center items-center h-full w-full">
-        <ul>
-          {menu.map(
-            (item) => (
-              (key = item.card.info.id),
-              (
-                <li className="flex flex-wrap justify-between items-center h-full w-full">
-                  <MenuItem info={item.card.info} />
-                  {/* {item.card.info.name} - Rs. {item.card.info.price / 100} */}
-                </li>
-              )
-            )
-          )}
+      <div className="RestaurantMenu  justify-center items-center h-full w-full">
+        <ul className="w-full flex flex-wrap justify-center">
+          {categorizedCards.map((category, index) => (
+            <RestaurantCategory
+              key={index}
+              data={category.card.card}
+              showItems={index===showIndex? true:false}
+              setShowIndex = {() => setShowIndex(index)}
+              collapse = {() => setShowIndex(-1)}
+            />
+          ))}
         </ul>
       </div>
     </div>

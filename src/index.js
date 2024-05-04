@@ -4,7 +4,6 @@ import Header from "./components/Header.jsx";
 import Body from "./components/Body.jsx";
 import About from "./components/About.jsx";
 import Error from "./components/Error.jsx";
-import UserClass from "./components/UserClass.jsx"
 import Contact from "./components/Contact.jsx";
 import RestaurantMenu from "./components/RestaurantMenu.jsx";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
