@@ -18,7 +18,11 @@ const RestaurantMenu = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(MENU_URL + param.id);
+      const response = await fetch(MENU_URL + param.id,      {
+        headers: {
+          "x-cors-api-key": "temp_6a7ea86a83636d5de76b5db003eec9f0",
+        },
+      });
 
       const json = await response.json();
       const info = json?.data?.cards[2]?.card?.card;

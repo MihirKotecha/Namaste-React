@@ -9,7 +9,11 @@ class UserCard extends React.Component {
     };
   }
   async componentDidMount() {
-    const data = await fetch("https://api.github.com/users/MihirKotecha");
+    const data = await fetch("https://api.github.com/users/MihirKotecha",      {
+      headers: {
+        "x-cors-api-key": "temp_6a7ea86a83636d5de76b5db003eec9f0",
+      },
+    });
     const json = await data.json();
     console.log(json);
     this.setState({ userInfo: json });
