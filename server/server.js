@@ -5,8 +5,11 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 // Create an Express application
 const app = express();
 
-// Enable CORS for all routes
-app.use(cors());
+let corsOptions = { 
+  origin : ['https://fodiebite-ten.vercel.app/'], 
+} 
+ 
+app.use(cors(corsOptions))
 
 // Proxy middleware setup
 app.use(
