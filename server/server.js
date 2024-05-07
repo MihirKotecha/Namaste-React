@@ -11,6 +11,8 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"], // Define allowed headers
   credentials: true, // Allow cookies and authentication information
 }));
+app.options("*", cors()); // Handle preflight requests globally
+
 
 // Proxy middleware setup
 app.use(
