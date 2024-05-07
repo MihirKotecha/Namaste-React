@@ -10,31 +10,31 @@ const Body = () => {
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [showRated, setShowRated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
+    setIsLoading(true); // Set loading to true before fetching
     const response = await fetch(
-      "https://proxy.cors.sh/https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.02760&lng=72.58710&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
-      {
-        headers: {
-          "x-cors-api-key": "temp_6a7ea86a83636d5de76b5db003eec9f0",
-        },
-      }
+      "http://localhost:3000/proxy/https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.02760&lng=72.58710&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+   
     );
     const json = await response.json();
     const restaurants =
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
+       ?.restaurants;
     setListOfRestraunts(restaurants);
     setFilteredRestraunts(restaurants);
+    setIsLoading(false); // Set loading to false after fetching
   };
+
   const onlineStatus = useOnlineStatus();
   if (!onlineStatus) return <h1 className="text-center">You are offline!!</h1>;
-  if (listOfRestraunts.length === 0) return <Shimmer />;
-  // console.log(listOfRestraunts);
+  if (isLoading) return <Shimmer />; // Show shimmer while loading
+  if (listOfRestraunts.length === 0) return <Shimmer />; // Show shimmer if no data
 
   const OpenRes = ModifiedRestrauntCards(RestrauntCards);
 
@@ -52,8 +52,8 @@ const Body = () => {
           onClick={() => {
             const filteredList = filteredRestraunts.filter((restraunt) =>
               restraunt.info.name
-                .toLowerCase()
-                .includes(searchText.toLowerCase())
+               .toLowerCase()
+               .includes(searchText.toLowerCase())
             );
             setListOfRestraunts(filteredList);
           }}
@@ -82,15 +82,6 @@ const Body = () => {
         {listOfRestraunts.map((restraunt) => (
           <div key={restraunt.info.id}>
             <Link to={"/restaurant/" + restraunt.info.id}>
-              {" "}
-              {/* {restraunt.info.isOpen ? (
-                <OpenRes
-                  key={restraunt.info.id}
-                  resData={restraunt}
-                />
-              ) : (
-                <RestrauntCards key={restraunt.info.id} resData={restraunt} />
-              )} */}
               <RestrauntCards key={restraunt.info.id} resData={restraunt} />
             </Link>
           </div>
