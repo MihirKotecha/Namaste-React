@@ -5,13 +5,20 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 // Create an Express application
 const app = express();
 
+app.options("*", cors({
+  origin: "*", // Allow all origins for testing
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
+
 app.use(cors({
   origin: "*", // Allow requests from any domain
   methods: ["GET", "POST", "OPTIONS"], // Define allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Define allowed headers
   credentials: true, // Allow cookies and authentication information
 }));
-app.options("*", cors()); // Handle preflight requests globally
+
 
 
 // Proxy middleware setup
