@@ -5,21 +5,29 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 // Create an Express application
 const app = express();
 
-app.options("*", cors({
-  origin: "*", // Allow all origins for testing
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-}));
+app.options(
+  "*",
+  cors({
+    origin: "*", // Allow all origins for testing
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
-app.use(cors({
-  origin: "*", // Allow requests from any domain
-  methods: ["GET", "POST", "OPTIONS"], // Define allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Define allowed headers
-  credentials: true, // Allow cookies and authentication information
-}));
+app.use(
+  cors({
+    origin: "*", // Allow requests from any domain
+    methods: ["GET", "POST", "OPTIONS"], // Define allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Define allowed headers
+    credentials: true, // Allow cookies and authentication information
+  })
+);
 
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 // Proxy middleware setup
 app.use(
@@ -47,10 +55,12 @@ app.use(
   })
 );
 
-app.get('/',(req,res)=>{
+app.get("/", (req, res) => {
   res.send("Hello");
-})
+});
 
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
 // Start the server
-module.exports = app;
-
+// module.exports = app;
