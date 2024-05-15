@@ -1,4 +1,3 @@
-import MenuItem from "./MenuItem";
 import Shimmer from "./Shimmer";
 import RestaurantCategory from "./RestaurantCategory";
 import { MENU_URL, CDN_URL } from "../utils/constants";
@@ -18,11 +17,7 @@ const RestaurantMenu = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(MENU_URL + param.id,      {
-        headers: {
-          "x-cors-api-key": "temp_6a7ea86a83636d5de76b5db003eec9f0",
-        },
-      });
+      const response = await fetch(MENU_URL + param.id);
 
       const json = await response.json();
       const info = json?.data?.cards[2]?.card?.card;

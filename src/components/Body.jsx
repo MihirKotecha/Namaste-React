@@ -19,7 +19,7 @@ const Body = () => {
   const fetchData = async () => {
     setIsLoading(true); // Set loading to true before fetching
     const response = await fetch(
-      "https://foodiebite-api.vercel.app/proxy/https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.02760&lng=72.58710&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.02760&lng=72.58710&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
    
     );
     const json = await response.json();

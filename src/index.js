@@ -6,16 +6,24 @@ import About from "./components/About.jsx";
 import Error from "./components/Error.jsx";
 import Contact from "./components/Contact.jsx";
 import RestaurantMenu from "./components/RestaurantMenu.jsx";
+import UserContext from "./utils/UserContext.js";
+import LoginPage from "./components/LoginPage.jsx";
+import { useState } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const AppLayout = () => (
-  <div className="app">
-    <Header></Header>
-    <Outlet></Outlet>
-  </div>
-);
+const AppLayout = () => {
+  const [userName, setUserName] = useState("Mihir Kotecha");
+  return (
+    <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
+      <div className="app">
+        <Header></Header>
+        <Outlet></Outlet>
+      </div>
+    </UserContext.Provider>
+  );
+};
 
 const appRouter = createBrowserRouter([
   {
@@ -24,7 +32,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />
+        element: <Body />,
       },
       {
         path: "/about",
@@ -32,12 +40,16 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact />
+        element: <Contact />,
       },
       {
         path: "/restaurant/:id",
-        element: <RestaurantMenu />
-      }
+        element: <RestaurantMenu />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />
+      },
     ],
     errorElement: <Error />,
   },
