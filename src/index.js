@@ -17,7 +17,7 @@ import appStore from "./utils/appStore.js";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const AppLayout = () => {
-  const [userName, setUserName] = useState("Mihir Kotecha");
+  const [userName, setUserName] = useState("Guest");
   return (
     <Provider store={appStore}>
       <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
