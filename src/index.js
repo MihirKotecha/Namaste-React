@@ -8,20 +8,25 @@ import Contact from "./components/Contact.jsx";
 import RestaurantMenu from "./components/RestaurantMenu.jsx";
 import UserContext from "./utils/UserContext.js";
 import LoginPage from "./components/LoginPage.jsx";
+import Cart from "./components/Cart.jsx";
 import { useState } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const AppLayout = () => {
   const [userName, setUserName] = useState("Mihir Kotecha");
   return (
-    <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
-      <div className="app">
-        <Header></Header>
-        <Outlet></Outlet>
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <Header></Header>
+          <Outlet></Outlet>
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -48,8 +53,16 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <LoginPage />
+        element: <LoginPage />,
       },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "*",
+        element: <Error />,
+      }
     ],
     errorElement: <Error />,
   },

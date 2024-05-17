@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const RestaurantCategory = (props) => {
  
-  console.log(props);
+  // console.log(props);
   const {  data, showItems, setShowIndex, collapse } = props;
   const [isOpen, setisOpen] = useState(false);
   const handleClick = () => {
