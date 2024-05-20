@@ -8,7 +8,7 @@ const Header = () => {
   
   const user = useContext(UserContext);
   const cartItems = useSelector((store)=>store.cart.items);
-  console.log(cartItems);
+  // console.log(cartItems);
   return (
     <div className="sticky top-0 flex justify-between bg-white shadow-xl mb-2">
       <div className="logo-container">

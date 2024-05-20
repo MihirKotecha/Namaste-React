@@ -9,7 +9,7 @@ const RestaurantMenu = () => {
     fetchData();
   }, []);
 
-  const [menu, setMenu] = useState([]);
+  // const [menu, setMenu] = useState([]);
   const [resInfo, setResInfo] = useState([]);
   const [categorizedCards, setCategorizedCards] = useState([]);
   const [showIndex, setShowIndex] = useState(-1);
@@ -21,9 +21,9 @@ const RestaurantMenu = () => {
 
       const json = await response.json();
       const info = json?.data?.cards[2]?.card?.card;
-      const menuItems =
-        json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-          ?.card?.itemCards;
+      // const menuItems =
+      //   json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+      //     ?.card?.itemCards;
       setCategorizedCards(
         json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
           (c) =>
@@ -33,13 +33,13 @@ const RestaurantMenu = () => {
       );
 
       setResInfo(info || []);
-      setMenu(menuItems || []);
+      // setMenu(menuItems || []);
     } catch (err) {
       err("Error in fetching data!");
     }
   };
   // console.log(categorizedCards);
-  if (resInfo.length === 0 || menu.length === 0) return <Shimmer />;
+  if (resInfo.length === 0) return <Shimmer />;
 
   const { cuisines, name, avgRating } = resInfo.info;
 

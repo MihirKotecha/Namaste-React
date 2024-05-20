@@ -24,7 +24,7 @@ const MenuItem = (parmas) => {
         <p>Rs. {price / 100}</p>
       </div>
       <div className="flex justify-end items-start">
-        <div className="absolute ">
+        <div className="absolute">
           <button
             className="p-2 mx-28 rounded-lg bg-black text-white shadow-lg"
             onClick={() => handleAddItem(item)}
